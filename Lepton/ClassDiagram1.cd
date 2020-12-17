@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Lepton.Program">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Lepton.CCI">
+    <Position X="2.5" Y="0.5" Width="3.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="Lepton.CCI.LepFunctionNotSupported" Collapsed="true">
+        <TypeIdentifier />
+      </Class>
+      <Class Name="Lepton.CCI.LepOtpReadError" Collapsed="true">
+        <TypeIdentifier />
+      </Class>
+      <Class Name="Lepton.CCI.LepUndefinedErrorCode" Collapsed="true">
+        <TypeIdentifier />
+      </Class>
+      <Class Name="Lepton.CCI.LepNotReady" Collapsed="true">
+        <TypeIdentifier />
+      </Class>
+      <Class Name="Lepton.CCI.LepDivZeroError" Collapsed="true">
+        <TypeIdentifier />
+      </Class>
+      <Class Name="Lepton.CCI.LepCommChecksumError" Collapsed="true">
+        <TypeIdentifier />
+      </Class>
+      <Class Name="Lepton.CCI.LepErrorClosingComm" Collapsed="true">
+        <TypeIdentifier />
+      </Class>
+      <Class Name="Lepton.CCI.LepRangeError" Collapsed="true">
+        <TypeIdentifier />
+      </Class>
+      <Class Name="Lepton.CCI.LepUndefinedFunctionError" Collapsed="true">
+        <TypeIdentifier />
+      </Class>
+      <Class Name="Lepton.CCI.LepErrorI2cFail" Collapsed="true">
+        <TypeIdentifier />
+      </Class>
+      <Class Name="Lepton.CCI.LepDataOutOfRangeError" Collapsed="true">
+        <TypeIdentifier />
+      </Class>
+      <Class Name="Lepton.CCI.LepCommErrorWritingComm" Collapsed="true">
+        <TypeIdentifier />
+      </Class>
+      <Class Name="Lepton.CCI.DisconnectedError" Collapsed="true">
+        <TypeIdentifier />
+      </Class>
+      <Class Name="Lepton.CCI.LepCommCountError" Collapsed="true">
+        <TypeIdentifier />
+      </Class>
+      <Class Name="Lepton.CCI.LepChecksumError" Collapsed="true">
+        <TypeIdentifier />
+      </Class>
+      <Class Name="Lepton.CCI.LepOtpNotProgrammedError" Collapsed="true">
+        <TypeIdentifier />
+      </Class>
+      <Class Name="Lepton.CCI.LepErrorI2cBusError" Collapsed="true">
+        <TypeIdentifier />
+      </Class>
+      <Class Name="Lepton.CCI.LeptonError" Collapsed="true">
+        <TypeIdentifier />
+      </Class>
+      <Class Name="Lepton.CCI.LepErrorI2c" Collapsed="true">
+        <TypeIdentifier />
+      </Class>
+      <Class Name="Lepton.CCI.LepErrorI2cNackReceived" Collapsed="true">
+        <TypeIdentifier />
+      </Class>
+      <Class Name="Lepton.CCI.LepCommError" Collapsed="true">
+        <TypeIdentifier />
+      </Class>
+      <Class Name="Lepton.CCI.LepTimeoutError" Collapsed="true">
+        <TypeIdentifier />
+      </Class>
+      <Class Name="Lepton.CCI.Oem" Collapsed="true">
+        <TypeIdentifier />
+      </Class>
+      <Class Name="Lepton.CCI.LepBadArgPointerError" Collapsed="true">
+        <TypeIdentifier />
+      </Class>
+      <Class Name="Lepton.CCI.LepCommandNotAllowed" Collapsed="true">
+        <TypeIdentifier />
+      </Class>
+      <Class Name="Lepton.CCI.LepCommRangeError" Collapsed="true">
+        <TypeIdentifier />
+      </Class>
+      <Class Name="Lepton.CCI.LepCommPortNotOpen" Collapsed="true">
+        <TypeIdentifier />
+      </Class>
+      <Class Name="Lepton.CCI.Error" Collapsed="true">
+        <TypeIdentifier />
+      </Class>
+      <Class Name="Lepton.CCI.LepOtpError" Collapsed="true">
+        <TypeIdentifier />
+      </Class>
+      <Class Name="Lepton.CCI.LepDataSizeError" Collapsed="true">
+        <TypeIdentifier />
+      </Class>
+      <Class Name="Lepton.CCI.LepOperationCanceled" Collapsed="true">
+        <TypeIdentifier />
+      </Class>
+      <Class Name="Lepton.CCI.LepErrorStartingComm" Collapsed="true">
+        <TypeIdentifier />
+      </Class>
+      <Class Name="Lepton.CCI.Vid" Collapsed="true">
+        <TypeIdentifier />
+      </Class>
+      <Class Name="Lepton.CCI.Agc" Collapsed="true">
+        <TypeIdentifier />
+      </Class>
+      <Class Name="Lepton.CCI.LepErrorI2cBufferOverflow" Collapsed="true">
+        <TypeIdentifier />
+      </Class>
+      <Class Name="Lepton.CCI.LepErrorI2cBusNotReady" Collapsed="true">
+        <TypeIdentifier />
+      </Class>
+      <Class Name="Lepton.CCI.Handle" Collapsed="true">
+        <TypeIdentifier />
+      </Class>
+      <Class Name="Lepton.CCI.Rad" Collapsed="true">
+        <TypeIdentifier />
+      </Class>
+      <Class Name="Lepton.CCI.LepCommErrorReadingComm" Collapsed="true">
+        <TypeIdentifier />
+      </Class>
+      <Class Name="Lepton.CCI.LepError" Collapsed="true">
+        <TypeIdentifier />
+      </Class>
+      <Class Name="Lepton.CCI.LepErrorCreatingComm" Collapsed="true">
+        <TypeIdentifier />
+      </Class>
+      <Class Name="Lepton.CCI.UnknownError" Collapsed="true">
+        <TypeIdentifier />
+      </Class>
+      <Class Name="Lepton.CCI.Sys" Collapsed="true">
+        <TypeIdentifier />
+      </Class>
+      <Class Name="Lepton.CCI.LepCommInvalidPortError" Collapsed="true">
+        <TypeIdentifier />
+      </Class>
+      <Class Name="Lepton.CCI.LepCommNoDev" Collapsed="true">
+        <TypeIdentifier />
+      </Class>
+      <Class Name="Lepton.CCI.LepOtpWriteError" Collapsed="true">
+        <TypeIdentifier />
+      </Class>
+      <Class Name="Lepton.CCI.LepErrorI2cArbitrationLost" Collapsed="true">
+        <TypeIdentifier />
+      </Class>
+      <Class Name="Lepton.CCI.LepProcessingError" Collapsed="true">
+        <TypeIdentifier />
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
