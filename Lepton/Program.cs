@@ -19,7 +19,13 @@ namespace Lepton
         //static int remotePort = 61112;
         //SerialPort serialPortLepton;
 
+
         static double[] coefPT = new double[3];     // { -4.305856E-05, 0.7836985, -3480.252 };
+        static string[] arguments = new string[3];
+        static SerialPort serialPortLepton;
+        static double k = -9.6441;
+        static double b = 496.2088;
+
 
         static byte[] GetBytes(double[] values)
         {
@@ -29,7 +35,32 @@ namespace Lepton
         private static void TimerCallback(Object o)
         {
             Console.WriteLine("In TimerCallback: " + DateTime.Now);
-
+            if (serialPortLepton != null && serialPortLepton.IsOpen != true)
+            {
+                try
+                {
+                    serialPortLepton.Open();
+                }
+                catch(Exception ex)
+                {
+                    Console.WriteLine("ex " + ex.Message);
+                }
+            }
+        }
+        private static void restartFunc()
+        {
+           
+            if (serialPortLepton != null && serialPortLepton.IsOpen != true)
+            {
+                try
+                {
+                    serialPortLepton.Open();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("ex " + ex.Message);
+                }
+            }
         }
 
 
@@ -40,29 +71,30 @@ namespace Lepton
         private static extern IntPtr GetConsoleWindow();
 
         static void Main(string[] args) //async Task
-        {
-            
+        {            
+
             if (args.Length == 0)
             {
                 System.Console.WriteLine("No enter a coef.");
-                //coefPT = new double[] { -4.305856E-05, 0.7836985, -3480.252 };
                 coefPT[0] = -4.305856E-05;
                 coefPT[1] = 0.7836985;
                 coefPT[2] = -3480.252;
             }
-            if (args.Length == 3)
+            if (args.Length == 5)
             {
                 double.TryParse(args[0], out coefPT[0]);
                 double.TryParse(args[1], out coefPT[1]);
                 double.TryParse(args[2], out coefPT[2]);
+                double.TryParse(args[3], out k);
+                double.TryParse(args[4], out b);
             }
 
             // --------------- Скрыть окно -------------------------------------------------
-            //ShowWindow(GetConsoleWindow(), 0);             
+            ShowWindow(GetConsoleWindow(), 0);             
 
 
             //com3 - pc      planhet - com8
-            SerialPort serialPortLepton = new SerialPort("COM8", 115200, Parity.None, 8, StopBits.One); //COM3
+            serialPortLepton = new SerialPort("COM8", 115200, Parity.None, 8, StopBits.One); //COM3
 
             if (serialPortLepton != null)
             {
@@ -80,95 +112,6 @@ namespace Lepton
                 }
             }
 
-
-            while (false)
-            {
-                //var devices = Lepton.CCI.GetDevices();
-                //if (devices.Count == 0)
-                //{
-                //    Console.WriteLine("no Lepton CCI Devices...");
-                //}
-                //else
-                //{
-                //    var device = devices[0];
-                //    var CCIHandle0 = device.Open();
-
-                //    try
-                //    {
-                //        var histogram = CCIHandle0.agc.GetHistogramStatistics();
-                //        var leptonFPA = CCIHandle0.sys.GetFpaTemperatureCelsius() / 100;
-
-                //        //max = (0.0214 * (histogram.maxIntensity - 8192) + 304 - 273);
-                //        //min = (0.0214 * (histogram.minIntensity - 8192) + 304 - 273);
-                //        //mean = (0.0214 * (histogram.meanIntensity - 8192) + 304 - 273);                       
-
-                //        max  = coefPT[0] * histogram.maxIntensity * histogram.maxIntensity + coefPT[1] * histogram.maxIntensity + coefPT[2];
-                //        min  = coefPT[0] * histogram.minIntensity * histogram.minIntensity + coefPT[1] * histogram.minIntensity + coefPT[2];
-                //        mean = coefPT[0] * histogram.meanIntensity * histogram.meanIntensity + coefPT[1] * histogram.meanIntensity + coefPT[2];
-
-                //        #region comment
-
-                //        //max = histogram.maxIntensity ;
-                //        //min = histogram.minIntensity ;
-                //        //mean = histogram.meanIntensity;
-                //        //
-
-                //        /*var videoRoi = CCIHandle0.sys.GetSceneRoi();
-                //        videoRoi.startCol = 0;
-                //        videoRoi.endCol = 79;
-                //        videoRoi.startRow = 0;
-                //        videoRoi.endRow = 59;
-                //        CCIHandle0.sys.SetSceneRoi(videoRoi);
-                //        videoRoi = CCIHandle0.sys.GetSceneRoi();
-
-                //        await Task.Delay(500);
-
-                //        var histogramScene = CCIHandle0.sys.GetSceneStatistics();
-                //        sysMax = histogramScene.maxIntensity;
-                //        sysMin = histogramScene.minIntensity;
-
-
-                //        videoRoi.startCol = 71;
-                //        videoRoi.endCol = 75;
-                //        videoRoi.startRow = 28;
-                //        videoRoi.endRow = 30;
-                //        CCIHandle0.sys.SetSceneRoi(videoRoi);
-                //        videoRoi = CCIHandle0.sys.GetSceneRoi();
-
-                //        await Task.Delay(500);
-
-                //        var histogramCenter = CCIHandle0.sys.GetSceneStatistics();
-                //        sysCenterMax = histogramCenter.maxIntensity;
-                //        sysCenterMin = histogramCenter.minIntensity;
-                //        sysCenterMean = histogramCenter.meanIntensity;
-
-                //        q1 = sysCenterMean * 100 / (sysMax - sysMin);
-                //        q2 = ((histogram.maxIntensity - histogram.minIntensity) * q1 / 100) + histogram.minIntensity;
-                //        meanPoint = (0.0214 * (q2 - 8192) + 304 - 273);*/
-                //        #endregion
-
-                //        //Console.WriteLine("max = {0}  min = {1}  mean = {2} meanPoint = {3} ", max, min, mean, meanPoint);
-                //        Console.WriteLine("max = {0}  min = {1}  mean = {2} fpa = {3}", max, min, mean, leptonFPA);
-
-                //        //string strSend = string.Format("{0}:{1}", min, max);
-                //        string strSendPoint = string.Format("{0}:{1}:{2}\n", min, max, mean);
-
-                //        //data = Encoding.ASCII.GetBytes(strSendPoint);
-                //        if(serialPortLepton.IsOpen)
-                //        {
-                //            serialPortLepton.WriteLine(strSendPoint);
-                //        }
-
-                //        await Task.Delay(200);
-
-                //    }
-                //    catch (Exception ex)
-                //    {
-                //        Console.WriteLine(ex.Message);
-                //    }
-
-                //}
-            }
 
             #region old code tcp server
             /*static async Task Main(string[] args)
@@ -509,6 +452,8 @@ namespace Lepton
             Console.ReadKey();
         }
 
+
+        
         private static void SerialPortLepton_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             Console.WriteLine("\n data received open" + Environment.NewLine);
@@ -532,6 +477,7 @@ namespace Lepton
             if (devices.Count == 0)
             {
                 Console.WriteLine("no Lepton CCI Devices...");
+                restartFunc();
             }
             else
             {
@@ -541,15 +487,19 @@ namespace Lepton
                 try
                 {
                     var histogram = CCIHandle0.agc.GetHistogramStatistics();
-                    var leptonFPA = CCIHandle0.sys.GetFpaTemperatureCelsius() / 100;                    
+                    var leptonFPA = CCIHandle0.sys.GetFpaTemperatureCelsius();
 
-                    max = coefPT[0] * histogram.maxIntensity * histogram.maxIntensity + coefPT[1] * histogram.maxIntensity + coefPT[2];
-                    min = coefPT[0] * histogram.minIntensity * histogram.minIntensity + coefPT[1] * histogram.minIntensity + coefPT[2];
-                    mean = coefPT[0] * histogram.meanIntensity * histogram.meanIntensity + coefPT[1] * histogram.meanIntensity + coefPT[2];
+                    var xMax  = histogram.maxIntensity  - (k * (leptonFPA - 35.5) + b);
+                    var xMin  = histogram.minIntensity  - (k * (leptonFPA - 35.5) + b);
+                    var xMean = histogram.meanIntensity - (k * (leptonFPA - 35.5) + b);
+
+                    max   = coefPT[0] * xMax * xMax   + coefPT[1] * xMax  + coefPT[2];
+                    min   = coefPT[0] * xMin * xMin   + coefPT[1] * xMin  + coefPT[2];
+                    mean  = coefPT[0] * xMean * xMean + coefPT[1] * xMean + coefPT[2];
 
                     Console.WriteLine("max = {0}  min = {1}  mean = {2} fpa = {3}", max, min, mean, leptonFPA);
 
-                    string strSendPoint = string.Format("{0:0.##}:{1:0.##}:{2:0.##}\n", min, max, mean);
+                    string strSendPoint = string.Format("{0:0.#}:{1:0.#}:{2:0.#}\n", min, max, mean);
 
                     serialPort.Open();
                     if(serialPort.IsOpen)
@@ -559,6 +509,11 @@ namespace Lepton
                 }
                 catch (Exception ex)
                 {
+                    //arguments[0] = coefPT[0].ToString();
+                    //arguments[1] = coefPT[1].ToString();
+                    //arguments[2] = coefPT[2].ToString();
+                    //serialPort.Close();
+                    //Main(arguments);
                     Console.WriteLine(ex.Message);
                 }
 
