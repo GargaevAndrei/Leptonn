@@ -40,12 +40,18 @@ namespace Lepton
             Console.WriteLine("In TimerCallback: " + DateTime.Now + " count = " + cameraCount);
 
             if (cameraCount < filterInfoCollection.Count)
-            {                
+            {
                 try
                 {
-                    //C:\\Program Files\\CameraCOT\\CameraCOT
-                    //C:\\Users\\Andrei\\Desktop\\CameraCOT
-                    Process.Start("C:\\Program Files\\CameraCOT\\CameraCOT");                    
+                    Process.Start("C:\\Program Files (x86)\\CameraCOT\\CameraCOT");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+                try
+                {
+                    Process.Start("C:\\Program Files\\CameraCOT\\CameraCOT");
                 }
                 catch (Exception ex)
                 {
@@ -105,7 +111,7 @@ namespace Lepton
                 double.TryParse(args[6], out coefPT[6]);
                 double.TryParse(args[7], out coefPT[7]);
                 double.TryParse(args[8], out coefPT[8]);
-
+                 
             }
 
             Timer t = new Timer(TimerCallback, null, 0, 3000);
@@ -113,7 +119,7 @@ namespace Lepton
 
             // --------------- Скрыть окно -------------------------------------------------
 
-            //ShowWindow(GetConsoleWindow(), 0);             
+            ShowWindow(GetConsoleWindow(), 0);             
 
 
             //com3 - pc      planhet - com8
@@ -144,7 +150,7 @@ namespace Lepton
 
 
             Choices numbers = new Choices();
-            numbers.Add(new string[] { "главная", "эндо", "термо", "дабл", "фотография","фото", "запись", "стоп", "пауза", "плюс", "минус", "заметка", "альбом", "помощь", "вспышка", "двойной" });
+            numbers.Add(new string[] { "главная", "кам", "эндо", "термо", "дабл", "фотография","фото", "запись", "стоп", "пауза", "плюс", "минус", "заметка", "альбом", "помощь", "вспышка", "двойной" });
 
 
             GrammarBuilder gb = new GrammarBuilder();
@@ -162,7 +168,7 @@ namespace Lepton
         static void sre_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
         {
             string temp = "";
-            if (e.Result.Confidence > 0.6)
+            if (e.Result.Confidence > 0.7)
             {
 
                 switch(e.Result.Text)
@@ -183,6 +189,7 @@ namespace Lepton
                     case "двойной":     temp = "14";   break;
                     case "фото":        temp = "15";   break;
                     case "дабл":        temp = "16";   break;
+                    case "кам":         temp = "17";   break;
                 }
 
                 Console.WriteLine(e.Result.Text);
